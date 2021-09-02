@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 
 @Entity(name="material_publicado")
 public class Publicacao {
@@ -29,6 +31,7 @@ public class Publicacao {
 	@Column
 	private Integer tipo_material;
 	@Column
+	@CreationTimestamp
 	private Date data;
 	
 	public Publicacao() {
