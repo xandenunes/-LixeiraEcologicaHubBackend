@@ -4,11 +4,16 @@ import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 @Entity(name="material_publicado")
@@ -19,8 +24,6 @@ public class Publicacao {
 	@Column
 	private String titulo;
 	@Column
-	private Integer idusuario;
-	@Column
 	private String imgURL;
 	@Column	
 	private String descricao;
@@ -28,15 +31,28 @@ public class Publicacao {
 	private String telefone;
 	@Column
 	private Integer status;
-	@Column
-	private Integer tipo_material;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="tipo_material")
+	@JsonIgnoreProperties({"publicacoes", "idtipo_material"})
+	private Material material;
+
 	@Column
 	@CreationTimestamp
 	private Date data;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "idusuario")
+	@JsonIgnoreProperties({"publicacoes", "senha"})
+	private Usuario usuario;
 	
 	public Publicacao() {
 		
 	}
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}	
 	public Integer getIdmaterial_publicado() {
 		return idmaterial_publicado;
 	}
@@ -79,16 +95,11 @@ public class Publicacao {
 	public void setData(Date data) {
 		this.data = data;
 	}
-	public Integer getIdusuario() {
-		return idusuario;
+	public Material getMaterial() {
+		return material;
 	}
-	public void setIdusuario(Integer idusuario) {
-		this.idusuario = idusuario;
+	public void setMaterial(Material material) {
+		this.material = material;
 	}
-	public Integer getTipo_material() {
-		return tipo_material;
-	}
-	public void setTipo_material(Integer tipo_material) {
-		this.tipo_material = tipo_material;
-	}
+
 }

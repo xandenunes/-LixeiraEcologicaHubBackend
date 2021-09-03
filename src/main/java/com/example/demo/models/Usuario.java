@@ -1,14 +1,17 @@
 package com.example.demo.models;
 
 import java.sql.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
-import org.hibernate.annotations.CreationTimestamp;
+
 
 @Entity(name="usuario")
 public class Usuario {
@@ -22,12 +25,38 @@ public class Usuario {
 	@Column
 	private String cep;
 	@Column
-	private String endereço;
+	private String endereco;
 	@Column
 	private String telefone;
 	@Column
-	@CreationTimestamp
 	private Date data_nascimento;
+	@Column
+	private String senha;
+
+	@OneToMany(fetch = FetchType.EAGER, mappedBy="usuario")
+	private List<Publicacao> publicacoes;
+	
+	public Usuario() {
+		
+	}
+	public String getSenha() {
+		return senha;
+	}
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}	
+	public String getEndereco() {
+		return endereco;
+	}
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
+	public List<Publicacao> getPublicacoes() {
+		return publicacoes;
+	}
+	public void setPublicacoes(List<Publicacao> publicacoes) {
+		this.publicacoes = publicacoes;
+	}
 	public int getIdusuario() {
 		return idusuario;
 	}
@@ -53,10 +82,10 @@ public class Usuario {
 		this.cep = cep;
 	}
 	public String getEndereço() {
-		return endereço;
+		return endereco;
 	}
-	public void setEndereço(String endereço) {
-		this.endereço = endereço;
+	public void setEndereço(String endereco) {
+		this.endereco = endereco;
 	}
 	public String getTelefone() {
 		return telefone;
