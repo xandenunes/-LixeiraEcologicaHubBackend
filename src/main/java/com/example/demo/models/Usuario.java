@@ -17,7 +17,7 @@ import javax.persistence.OneToMany;
 public class Usuario {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int idusuario;
+	private Integer idusuario;
 	@Column
 	private String nome;
 	@Column
@@ -32,10 +32,12 @@ public class Usuario {
 	private Date data_nascimento;
 	@Column
 	private String senha;
-
+	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy="usuario")
 	private List<Publicacao> publicacoes;
 	
+
+
 	public Usuario() {
 		
 	}
@@ -57,10 +59,10 @@ public class Usuario {
 	public void setPublicacoes(List<Publicacao> publicacoes) {
 		this.publicacoes = publicacoes;
 	}
-	public int getIdusuario() {
+	public Integer getIdusuario() {
 		return idusuario;
 	}
-	public void setIdusuario(int idusuario) {
+	public void setIdusuario(Integer idusuario) {
 		this.idusuario = idusuario;
 	}
 	public String getNome() {
@@ -99,4 +101,5 @@ public class Usuario {
 	public void setData_nascimento(Date data_nascimento) {
 		this.data_nascimento = data_nascimento;
 	}
+
 }

@@ -32,21 +32,24 @@ public class Publicacao {
 	@Column
 	private Integer status;
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="tipo_material")
-	@JsonIgnoreProperties({"publicacoes", "idtipo_material"})
+	@JoinColumn(name="tipo_material", referencedColumnName = "idtipo_material")
+	@JsonIgnoreProperties("publicacoes")
 	private Material material;
 
 	@Column
 	@CreationTimestamp
 	private Date data;
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "idusuario")
+
+	@JoinColumn(name = "idusuario",referencedColumnName = "idusuario")
 	@JsonIgnoreProperties({"publicacoes", "senha"})
 	private Usuario usuario;
 	
+	
 	public Publicacao() {
-		
+
 	}
+
 	public Usuario getUsuario() {
 		return usuario;
 	}
