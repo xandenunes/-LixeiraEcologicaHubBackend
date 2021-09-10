@@ -10,6 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 
@@ -34,13 +37,30 @@ public class Usuario {
 	private String senha;
 	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy="usuario")
+	@JsonIgnoreProperties({"usuario"})
 	private List<Publicacao> publicacoes;
 	
+
+	@OneToOne(fetch = FetchType.LAZY, mappedBy="usuario")
+	@JsonIgnoreProperties
+	private Interessado interessado;
 
 
 	public Usuario() {
 		
 	}
+	
+	
+	public Interessado getInteressado() {
+		return interessado;
+	}
+
+
+	public void setInteressado(Interessado interessado) {
+		this.interessado = interessado;
+	}
+
+
 	public String getSenha() {
 		return senha;
 	}
@@ -82,12 +102,6 @@ public class Usuario {
 	}
 	public void setCep(String cep) {
 		this.cep = cep;
-	}
-	public String getEndereço() {
-		return endereco;
-	}
-	public void setEndereço(String endereco) {
-		this.endereco = endereco;
 	}
 	public String getTelefone() {
 		return telefone;

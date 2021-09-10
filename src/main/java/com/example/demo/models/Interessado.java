@@ -3,16 +3,28 @@ package com.example.demo.models;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity(name="interessados_publicacao_log")
 public class Interessado {
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Integer id;
+
+
 	@Column
 	private Integer idmaterial_publicado;
-	@Column
-	private Integer id_usuario_interessado;
+	
+	@OneToOne
+	@JoinColumn(name="id_usuario_interessado")
+	@JsonIgnoreProperties({"publicacoes", "interessado","data_nascimento","senha"})
+	private Usuario usuario;
 	
 	@Column 
 	private Integer id_usuario_contemplado;
@@ -29,12 +41,15 @@ public class Interessado {
 		this.idmaterial_publicado = idmaterial_publicado;
 	}
 
-	public Integer getId_usuario_interessado() {
-		return id_usuario_interessado;
+
+
+
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	public void setId_usuario_interessado(Integer id_usuario_interessado) {
-		this.id_usuario_interessado = id_usuario_interessado;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	public Integer getId_usuario_contemplado() {
@@ -44,6 +59,12 @@ public class Interessado {
 	public void setId_usuario_contemplado(Integer id_usuario_contemplado) {
 		this.id_usuario_contemplado = id_usuario_contemplado;
 	}
+	public Integer getId() {
+		return id;
+	}
 
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 }

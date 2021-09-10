@@ -19,6 +19,24 @@ public class InteressadoServices {
 		List = (ArrayList<Interessado>) repository.findAll();
 		return List;
 	}
+
+	public Interessado save(Interessado interessado) {
+		return repository.save(interessado);
+	}
+
+	public ArrayList<Interessado> get(Integer publicacao) {
+		ArrayList<Interessado> arrayRetorno = new ArrayList<Interessado>();
+		arrayRetorno = (ArrayList<Interessado>) repository.get(publicacao);
+		return arrayRetorno;
+	}
+
+	public void delete(Integer id) {
+		repository.deleteById(id);
+	}
+
+
+
+
 	
 	
 	
