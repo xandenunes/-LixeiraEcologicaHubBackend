@@ -35,7 +35,6 @@ public class Publicacao {
 	@JoinColumn(name="tipo_material", referencedColumnName = "idtipo_material")
 	@JsonIgnoreProperties("publicacoes")
 	private Material material;
-
 	@Column
 	@CreationTimestamp
 	private Date data;

@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -24,6 +25,10 @@ public class Usuario {
 	@Column
 	private String nome;
 	@Column
+	private Integer exp;
+	@Column
+	private Integer level;
+	@Column
 	private String email;
 	@Column
 	private String cep;
@@ -31,11 +36,13 @@ public class Usuario {
 	private String endereco;
 	@Column
 	private String telefone;
+
 	@Column
 	private Date data_nascimento;
 	@Column
 	private String senha;
 	
+
 	@OneToMany(fetch = FetchType.EAGER, mappedBy="usuario")
 	@JsonIgnoreProperties({"usuario"})
 	private List<Publicacao> publicacoes;
@@ -49,7 +56,25 @@ public class Usuario {
 	public Usuario() {
 		
 	}
-	
+		
+	public Integer getExp() {
+		return exp;
+	}
+
+
+	public void setExp(Integer exp) {
+		this.exp = exp;
+	}
+
+
+	public Integer getLevel() {
+		return level;
+	}
+
+
+	public void setLevel(Integer level) {
+		this.level = level;
+	}	
 	
 	public Interessado getInteressado() {
 		return interessado;

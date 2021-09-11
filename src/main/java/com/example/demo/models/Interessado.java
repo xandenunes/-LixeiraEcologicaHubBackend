@@ -23,7 +23,7 @@ public class Interessado {
 	
 	@OneToOne
 	@JoinColumn(name="id_usuario_interessado")
-	@JsonIgnoreProperties({"publicacoes", "interessado","data_nascimento","senha"})
+	@JsonIgnoreProperties({"publicacoes", "interessado"})
 	private Usuario usuario;
 	
 	@Column 
